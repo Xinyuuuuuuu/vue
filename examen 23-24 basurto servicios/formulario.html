@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario de Servicio</title>
+</head>
+<body>
+  <form id="formulario-servicio">
+    <label for="nombre">Nombre del servicio:</label>
+    <input type="text" id="nombre" name="nombre" required />
+    <br />
+
+    <label for="pabellon">Pabellón:</label>
+    <input type="text" id="pabellon" name="pabellon" required />    
+    <br />
+
+    <label>
+    <!-- Checkbox es boolean -->
+      <input type="checkbox" id="mostrar" /> Mostrar
+    </label>
+    <br />
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script type="module" src="validar.js"></script>
+</body>
+</html>

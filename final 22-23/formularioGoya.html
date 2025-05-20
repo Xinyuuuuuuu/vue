@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Goya</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>¡Bienvenido al juego de los Goya 2023!</h1>
+
+    <input type="text" id="pelicula" placeholder="Título" disabled>
+    <select id="premio">
+        <option value="Mejor película">Mejor película</option>
+        <option value="Mejor dirección">Mejor dirección</option>
+        <option value="Mejor dirección novel">Mejor dirección novel</option>
+        <option value="Mejor actor protagonista">Mejor actor protagonista</option>
+        <option value="Mejor actriz protagonista">Mejor actriz protagonista</option>
+        <option value="Mejor actor de reparto">Mejor actor de reparto</option>
+        <option value="Mejor actriz de reparto">Mejor actriz de reparto</option>
+    </select>
+    <button id="comprobar">Comprobar</button>
+
+    <!-- Aquí se mostrará el mensaje de éxito/fracaso -->
+    <div id="mensaje"></div>
+
+    <script src="script.js"></script>
+</body>

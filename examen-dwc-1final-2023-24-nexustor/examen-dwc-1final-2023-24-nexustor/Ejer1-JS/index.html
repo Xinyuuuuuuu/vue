@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Grammys</title>
+</head>
+<body>
+
+  <h1>Juego de Preguntas de los Grammy 2024</h1>
+
+  <!-- En este div hay que incluir la pregunta -->
+  <div id="preguntaDiv">
+    <strong>En este div va la pregunta</strong>
+  </div>
+
+  <p>Selecciona el cantante/grupo del premio y haz clic en el botón para comprobar:</p>
+  <label for="cantanteSelect">Selecciona cantante/grupo:</label>
+  <select id="cantanteSelect">
+    <option value="">Selecciona opción</option>
+    <option value="Taylor Swift">Taylor Swift</option>
+    <option value="Victoria Monet">Victoria Monet</option>
+    <option value="Billie Eilish">Billie Eilish</option>
+    <option value="Killer Mike">Killer Mike</option>
+    <option value="SZA">SZA</option>
+    <option value="Miley Cirus">Miley Cirus</option>
+    <option value="Boygenius">Boygenius</option>
+    <option value="Metallica">Metallica</option>
+    <option value="Paramore">Paramore</option>
+    <option value="Julian Marley">Julian Marley</option>
+  </select>
+  
+  <button id="btnComprobar" onclick="comprobarRespuesta()">Comprobar</button>
+
+  <!-- En este ul hay que ir añadiendo los li nuevos cuando la respuesta es correcta -->
+  <ul id="respuestasCorrectas"></ul>
+
+  <script>
+
+  // Array de objetos con información del autor/a y categoría
+    const grammys = [
+      { autor: 'Taylor Swift', categoria: 'Album del año' },
+      { autor: 'Victoria Monet', categoria: 'Artista nuevo' },
+      { autor: 'Billie Eilish', categoria: 'Canción del año' },
+      { autor: 'Killer Mike', categoria: 'Album de Rap' },
+      { autor: 'SZA', categoria: 'Grupo pop' },
+      { autor: 'Miley Cirus', categoria: 'Interpretación vocal solista' },
+      { autor: 'Boygenius', categoria: 'Música Alternativa' },
+      { autor: 'Metallica', categoria: 'Interpretación de Metal' },
+      { autor: 'Paramore', categoria: 'Album rock' },
+      { autor: 'Julian Marley', categoria: 'Album Reggae' }
+    ];
+
+  // Aquí debes incluir el código JavaScript del ejercicio
+  // Variables para el control del juego
+  let aciertos = 0;
+    let fallos = 0;
+    let intentos = 0;
+
+    // Seleccionar una pregunta al azar
+    let indice = Math.floor(Math.random() * grammys.length);
+    let pregunta = grammys[indice];
+    
+    // Mostrar la pregunta en el div correspondiente
+    let preguntaDiv = document.getElementById('preguntaDiv');
+    preguntaDiv.textContent = `¿Quién ganó en la categoría ${pregunta.categoria}?`;
+
+    // Función para comprobar la respuesta
+    function comprobarRespuesta() {
+      let cantanteSelect = document.getElementById('cantanteSelect');
+      let seleccionado = cantanteSelect.value;
+      
+      if (seleccionado === pregunta.autor) {
+        alert('¡Correcto!');
+        aciertos++;
+        let respuestasCorrectas = document.getElementById('respuestasCorrectas');
+        let nuevaRespuesta = document.createElement('li');
+        nuevaRespuesta.textContent = `Categoría: ${pregunta.categoria} - Ganador: ${pregunta.autor}`;
+        respuestasCorrectas.appendChild(nuevaRespuesta);
+      } else {
+        alert('Incorrecto. Intenta de nuevo.');
+        fallos++;
+      }
+      
+      intentos++;
+      
+      // Verificar si se ha alcanzado el número de intentos
+      if (intentos === 5) {
+        alert(`Juego terminado. Aciertos: ${aciertos}, Fallos: ${fallos}`);
+        // Resetear el juego
+        aciertos = 0;
+        fallos = 0;
+        intentos = 0;
+        respuestasCorrectas.innerHTML = ''; // Limpiar la lista de respuestas correctas
+      }
+
+      // Generar una nueva pregunta
+      indice = Math.floor(Math.random() * grammys.length);
+      pregunta = grammys[indice];
+      preguntaDiv.textContent = `¿Quién ganó en la categoría ${pregunta.categoria}?`;
+    }
+
+  </script>
+
+</body>
+</html>

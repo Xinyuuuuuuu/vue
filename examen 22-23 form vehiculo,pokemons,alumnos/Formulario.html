@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Vehículo</title>
+    <style>
+        .imagen {
+            width: 100px;
+            height: 100px;
+            display: none;
+        }
+
+        .bordeRojo {
+            border: 3px solid red
+        }
+    </style>
+</head>
+
+<body>
+    <form id="vehiculoForm">
+        <div>
+            <label for="matricula">Matricula</label> <!-- Label base -->
+            <input type="text" id="matricula" name="matricula"
+                pattern="[0-9]{4}-[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]{3}" required>
+            <!-- Patrón de validación, 4 digitos, guión y 3 letras no vocales -->
+            <!--Required a ambos campos para hacer --obligatorio su llenado -->
+            <div>
+                <label for="tipo">Tipo</label>
+                <select name="tipo" id="tipo">
+                    <option value="">Seleccione un tipo</option>
+                    <option value="motocicleta">Motocicleta</option>
+                    <option value="automovil">Automóvil</option>
+                    <option value="camion">Camión</option>
+                </select>
+            </div>
+            <button type="submit">Enviar</button>
+<button type="button" id="mostrarDatos" >Mostrar Info</button>
+        </div>
+    </form>
+    <!-- Imagenes ocultas -->
+    <div id="imagenesContainer">
+        <img src="img/monorEdad.png" alt="Menor Edad" id="menorEdad" class="imagen">
+        <img src="img/mayorEdad.png" alt="Mayor Edad" id="mayorEdad" class="imagen">
+        <img src="img/particular.jpg" alt="Particular" id="particular" class="imagen">
+        <img src="img/profesional.png" alt="Profesional" id="profesional" class="imagen">
+        <img src="img/rigido.jpg" alt="Rígido" id="rigido" class="imagen">
+        <img src="img/articulado.png" alt="Articulado" id="articulado" class="imagen">
+    </div>
+
+    <!-- Info a mostrar al darle al boton Mostrar Info -->
+    <div id="resultado"></div>
+    <script>
+        //Esperar a que cargue completamente el documento
+        document.addEventListener("DOMContentLoaded", function () {
+            const selectTipo = document.getElementById("tipo");
+            const imagenes = document.querySelectorAll(".imagen");
+
+            // Función que oculta todas las imágenes
+            function ocultarTodas() {
+                // querySelectorAll acepta cualquier selector CSS: elementos div ("div"),
+                //ids ("#id"), clases (".clase"), etc.                
+                imagenes.forEach(imagen => {
+                    imagen.style.display = "none";
+                });
+            }
+
+            //Manejo del evento changege en el select de tipo de vehículo
+            selectTipo.addEventListener("change", function () {
+                ocultarTodas(); //Primero hay que ocultar las que estén con display block
+                // Usaremos switch case para --mostrar las imagenes dependiendo de la opcion seleccionada 
+                switch (this.value) {
+                    case "motocicleta": //en js no importa usar "" o ''
+                        document.getElementById("menorEdad").style.display = "block";
+                        document.getElementById("mayorEdad").style.display = "block";
+                        break;//salir del switch para dejar de evaluar los casos 
+
+                    case "automovil":
+                        document.getElementById("particular").style.display = "block";
+                        document.getElementById("profesional").style.display = "block";
+                        break;
+
+                    case "camion":
+                        document.getElementById("rigido").style.display = "block";
+                        document.getElementById("articulado").style.display = "block";
+                        break;
+                    default:
+                        break;
+                }
+
+            });
+
+            // Activar .bordeRojo a las imagenes al hacer click
+            imagenes.forEach(imagen => {
+                imagen.addEventListener("click", function () {
+                    imagenes.forEach(img=> img.classList.remove("bordeRojo")); //--remover la clase de todas las imagenes antes de agregar
+                    this.classList.add("bordeRojo"); //toggle agrega la clase si no la tiene y la quita si la tiene
+                    //El punto (.bordeRojo) se usa cuando se trabaja con selectores CSS (como en querySelector o en hojas de estilo)
+                });
+            });
+
+            //Funcion para mostrar matricula, automovil selecionado y tipo de automovil en el DOM al hacer click en el botón "Mostrar Info"
+            function mostrarInformacion() {
+                const matricula = document.getElementById("matricula").value;
+                const tipo = document.getElementById("tipo").value;
+                const imagenSeleccionada = document.querySelector(".imagen.bordeRojo");
+
+                //construimos el mensaje en html para mostrarlo en el DOM
+                let mensaje = `<p>Matrícula: ${matricula}</p>`;
+                mensaje += `<p>Vehículo: ${tipo}</p>`;
+                if (!imagenSeleccionada ) { //si no hay ninguna imagen seleccionada mostramos un mensaje de error
+                    mensaje += `<p>No se ha seleccionado ningúna imagen</p>`;
+                } else {
+                    mensaje += `<p>Tipo: ${imagenSeleccionada.alt}</p>`;
+                }
+
+                //se muestra el mensaje en el div con id resultado
+                document.getElementById("resultado").innerHTML = mensaje; //innerHTML inserta HTML en el DOM
+            }
+            //agregamos el evento click al boton "Mostrar Info"
+            document.getElementById("mostrarDatos").addEventListener("click", mostrarInformacion); 
+        });
+    </script>
+</body>
+
+</html>
