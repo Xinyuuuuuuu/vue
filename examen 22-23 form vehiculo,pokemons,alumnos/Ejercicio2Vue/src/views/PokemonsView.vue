@@ -39,27 +39,27 @@
         </table>
 
         <h2>Añadir Pokémon</h2>
-<div class="formulario">
-  <label>
-    Nombre:
-    <input v-model="nuevoPokemon.name" />
-  </label>
+        <div class="formulario">
+            <label>
+                Nombre:
+                <input v-model="nuevoPokemon.name" />
+            </label>
 
-  <label>
-    Tipo:
-    <input v-model="nuevoPokemon.type" />
-  </label>
+            <label>
+                Tipo:
+                <input v-model="nuevoPokemon.type" />
+            </label>
 
-  <label>
-    Habilidad:
-    <input v-model="nuevoPokemon.ability" />
-  </label>
+            <label>
+                Habilidad:
+                <input v-model="nuevoPokemon.ability" />
+            </label>
 
-  <!-- No necesita prevent porque no es un form -->
-  <button class="boton-agregar" @click="añadirPokemon">＋</button>
-</div>
+            <!-- No necesita prevent porque no es un form -->
+            <button class="boton-agregar" @click="añadirPokemon">＋</button>
+        </div>
 
-       
+
 
     </div>
 </template>

@@ -1,23 +1,3 @@
-<script>
-  //import axios from 'axios'
-  export default {
-      name: 'HelloWorld',
-      components: {},
-      data(){
-          return{
-            
-          }
-      },
-      methods:{
-          
-      },
-      mounted() {
-        
-      }
-  }
-</script>
-
-
 <template>
   <div>
     <h1 class="green">Bienvenido a la tienda de TxurdiVue / <em>Ongi etorri TxurdiVue-ren dendara</em></h1>
